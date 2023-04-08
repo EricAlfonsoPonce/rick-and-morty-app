@@ -3,7 +3,9 @@ package com.ericalfonsoponce.rick_and_morty_app.helpers.extensions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-
+inline fun <reified T : Any> Any.cast(): T {
+    return this as T
+}
 suspend fun <T> Any.callResult(
     call: suspend () -> Response<T>
 ): Result<T?> {

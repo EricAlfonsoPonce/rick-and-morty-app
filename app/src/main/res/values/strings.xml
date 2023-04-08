@@ -2,6 +2,18 @@
     <string name="app_name">Rick-And-Morty-App</string>
 
 
+    <!-- Miscellanea -->
+    <string name="toolbar_title">List of Characters</string>
+    <string name="name_title">Name:</string>
+    <string name="gender_title">Gender:</string>
+    <string name="status_title">Status:</string>
+
+
+    <!-- DIALOG -->
+    <string name="dialog_title">Title</string>
+    <string name="dialog_text">Text</string>
+    <string name="accept">Accept</string>
+    <string name="success">Success</string>
 
     <!-- ERRORS -->
     <string name="error_title">Error</string>

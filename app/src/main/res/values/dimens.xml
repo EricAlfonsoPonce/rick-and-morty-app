@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- MARGIN -->
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+
+    <!-- PADDING -->
+    <dimen name="padding_medium">10dp</dimen>
+
+    <!-- CORNER RADIUS -->
+    <dimen name="corner_radius_regular">8dp</dimen>
+
+    <!-- IMAGE SIZES -->
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="character_height_size">120dp</dimen>
+
+    <!-- ELEVATION -->
+    <dimen name="elevation_regular">4dp</dimen>
+
+</resources>
