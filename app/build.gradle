@@ -23,11 +23,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_BASE_URL", '"https://URL_API.com/api/"'
+            buildConfigField "String", "API_BASE_URL", '"https://rickandmortyapi.com/api/"'
         }
 
         debug{
-            buildConfigField "String", "API_BASE_URL", '"https://URL_API.com/api/"'
+            buildConfigField "String", "API_BASE_URL", '"https://rickandmortyapi.com/api/"'
             debuggable true
         }
     }

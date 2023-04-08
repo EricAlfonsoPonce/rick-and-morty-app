@@ -2,7 +2,7 @@ package com.ericalfonsoponce.rick_and_morty_app.di
 
 
 import com.ericalfonsoponce.rick_and_morty_app.BuildConfig
-import com.ericalfonsoponce.rick_and_morty_app.data.source.remote.api.NameApi
+import com.ericalfonsoponce.rick_and_morty_app.data.source.remote.api.CharactersApi
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
 import dagger.Module
@@ -53,7 +53,7 @@ object ApiModule {
     @Singleton
     fun provideApiService(
         retrofit: Retrofit
-    ): NameApi =
-        retrofit.create(NameApi::class.java)
+    ): CharactersApi =
+        retrofit.create(CharactersApi::class.java)
 
 }
