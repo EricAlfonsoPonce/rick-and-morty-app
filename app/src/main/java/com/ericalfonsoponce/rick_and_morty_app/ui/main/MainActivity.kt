@@ -1,7 +1,9 @@
 package com.ericalfonsoponce.rick_and_morty_app.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,6 +13,7 @@ import com.ericalfonsoponce.rick_and_morty_app.databinding.ActivityMainBinding
 import com.ericalfonsoponce.rick_and_morty_app.helpers.Constants
 import com.ericalfonsoponce.rick_and_morty_app.helpers.Constants.LOAD_VISIBLE_CHARACTER
 import com.ericalfonsoponce.rick_and_morty_app.helpers.extensions.showDoubleDialog
+import com.ericalfonsoponce.rick_and_morty_app.ui.character.CharacterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -34,8 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        viewModel.getCharacters()
-
         initAdapter()
         initListeners()
         initObservers()
@@ -44,7 +45,10 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         adapter = CharactersAdapter(
             onCharacterClick = {
-
+                startActivity(
+                    Intent(this, CharacterActivity::class.java)
+                        .putExtra(Constants.CHARACTER, it)
+                )
             }
         )
         binding.recyclerCharacter.adapter = adapter
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     (binding.recyclerCharacter.layoutManager as? GridLayoutManager)?.let {
-                        if (it.findLastVisibleItemPosition() >= adapter.itemCount - LOAD_VISIBLE_CHARACTER && viewModel.hastNext() && !viewModel.uiState.value.isLoading) {
+                        if (it.findLastVisibleItemPosition() >= (adapter.itemCount - LOAD_VISIBLE_CHARACTER) && viewModel.hasNext() && !viewModel.uiState.value.isLoading) {
                             viewModel.getCharacters()
                         }
                     }
@@ -77,13 +81,13 @@ class MainActivity : AppCompatActivity() {
                 .map { it.isLoading }
                 .distinctUntilChanged()
                 .collect {
-
+                    binding.loader.isVisible = it
                 }
         }
 
         lifecycleScope.launch {
             viewModel.uiState
-                .map { it.listCharacters }
+                .map { it.listCharacters.toList() }
                 .distinctUntilChanged()
                 .collect {
                     adapter.submitList(it)

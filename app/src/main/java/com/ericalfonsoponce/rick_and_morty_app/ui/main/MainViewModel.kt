@@ -12,6 +12,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+data class MainUiState(
+    val listCharacters: ArrayList<Character> = arrayListOf(),
+    val isLoading: Boolean = false,
+    val errorResourceId: Int? = 0
+)
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase
@@ -25,6 +32,10 @@ class MainViewModel @Inject constructor(
     private var hasNext: Boolean = true
     private var resetList: Boolean = false
 
+    init {
+        getCharacters()
+
+    }
     fun getCharacters() {
         setLoadingState(true)
         viewModelScope.launch {
@@ -37,7 +48,7 @@ class MainViewModel @Inject constructor(
                     characterResult?.results?.let {
                         setListCharacters(it)
                     }
-                    characterResult?.info?.let{
+                    characterResult?.info?.let {
                         setPage(it)
                     }
                 }
@@ -59,7 +70,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun hastNext(): Boolean = hasNext
+    fun hasNext(): Boolean = hasNext
 
     fun refreshData() {
         resetPage()
@@ -104,16 +115,11 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun clearError() {uiState.update {
-        it.copy(
-            errorResourceId = 0
-        )
-    } }
-
-    data class MainUiState(
-        val listCharacters: ArrayList<Character> = arrayListOf(),
-        val isLoading: Boolean = false,
-        val errorResourceId: Int? = 0
-    )
-
+    fun clearError() {
+        uiState.update {
+            it.copy(
+                errorResourceId = 0
+            )
+        }
+    }
 }

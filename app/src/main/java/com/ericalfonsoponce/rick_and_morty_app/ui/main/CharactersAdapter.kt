@@ -48,7 +48,7 @@ class CharactersAdapter(
                 .into(binding.imageCharacter)
 
             with(item) {
-                binding.textStatus.setTextColor(
+                binding.textStatusCharacter.setTextColor(
                     ContextCompat.getColor(
                         context,
                         if (status?.equals(Constants.ALIVE, true) == true)

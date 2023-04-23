@@ -19,4 +19,7 @@
     <!-- ELEVATION -->
     <dimen name="elevation_regular">4dp</dimen>
 
+    <!-- PROGRESS BAR -->
+    <dimen name="progress_bar_size">70dp</dimen>
+
 </resources>
